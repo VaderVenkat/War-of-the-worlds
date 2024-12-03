@@ -9,9 +9,7 @@ public class PlayerBehavior : MonoBehaviour
     private float _vInput;
     private float _hInput;
     private Rigidbody _rb;
-private float summa = 30f;
-    public float vadda = 3f;
-    public float eeeenakku = 4f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
