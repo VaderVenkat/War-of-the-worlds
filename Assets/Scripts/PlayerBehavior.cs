@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
@@ -14,6 +15,10 @@ public class PlayerBehavior : MonoBehaviour
     public float DistanceToGround = 0.1f;
     public LayerMask GroundLayer;
     private CapsuleCollider _col;
+    public GameObject Bullet;
+    public float BulletSpeed = 100f;
+    private bool _isShooting;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,7 +35,7 @@ public class PlayerBehavior : MonoBehaviour
         /* this.transform.Translate(Vector3.forward * _vInput * Time.deltaTime);
          this.transform.Rotate(Vector3.up * _hInput * Time.deltaTime);*/
         _isJumping |= Input.GetKeyDown(KeyCode.J);
-
+        _isShooting |= Input.GetKeyDown(KeyCode.Space);
     }
 
     private void FixedUpdate()
@@ -47,6 +52,16 @@ public class PlayerBehavior : MonoBehaviour
             _rb.AddForce(Vector3.up * JumpVelocity, ForceMode.Impulse);
         }
         _isJumping = false;
+
+        if (_isShooting)
+        {
+            GameObject newBullet = Instantiate(Bullet , this.transform.position + new Vector3(0, 0, 1), this . transform.rotation);
+
+            Rigidbody BulletRB = newBullet.GetComponent<Rigidbody>();
+
+            BulletRB.linearVelocity = this.transform.forward * BulletSpeed;
+        }
+        _isShooting = false;
     }
 
     private bool IsGrounded()
@@ -56,5 +71,7 @@ public class PlayerBehavior : MonoBehaviour
 
         return grounded;
     }
+
+   
 
 }
