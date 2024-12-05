@@ -385,6 +385,8 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
+  Bullet: {fileID: 5969259723525734612, guid: 531cc95420580884197abef19142fc02, type: 3}
+  BulletSpeed: 100
 --- !u!1 &169677022
 GameObject:
   m_ObjectHideFlags: 0

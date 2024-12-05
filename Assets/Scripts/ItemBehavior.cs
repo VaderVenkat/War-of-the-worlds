@@ -1,24 +1,22 @@
+using System;
 using UnityEngine;
 
 public class ItemBehavior : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.name == "Player")
-        {
-            Destroy(this.transform.gameObject);
-            Debug.Log("Item Collected !!!");
-        }
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameBehavior GameManager;
+
     void Start()
     {
-        
+        GameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.name == "Player")
+        {
+            Destroy(this.transform.parent.gameObject);
+            Debug.Log("Item Collected!!!");
+            GameManager.Items += 1;
+        }
     }
 }
